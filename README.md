@@ -17,6 +17,6 @@ TODO: may want to collapse the other classes into a helper file instead, otherwi
 TODO: remove all the commas and lower case all the tokens when processing data
 TODO: ablation analysis
 TODO: add image for the architecture of Toy BERT
-TODO: add steps just like HW9
+TODO: add steps and hints just like HW9
 
 References: https://theaisummer.com/jax-transformer/
