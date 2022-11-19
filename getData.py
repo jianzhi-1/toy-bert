@@ -15,15 +15,17 @@ def getData(batch_size=1, mask=0.15):
       "target": jnp.array
     }
   vocab_size: the total size of vocabulary, including auxiliary tokens
-  
+  sequence_length: the maximum length of sequence
   """
 
   direc = './data' # directory
   allfiles = [join(direc, f) for f in listdir(direc) if isfile(join(direc, f))]
   data_pairs = []
 
-  vocab_size = 5 # initially, start with <MASK>, <CLS>, <SEP>, <ISNEXT>, <NOTNEXT>
-  vocab_map = {"<MASK>": 0, "<CLS>": 1, "<SEP>": 2, "<ISNEXT>": 3, "<NOTNEXT>": 4}
+  
+  vocab_map = {"<MASK>": 0, "<CLS>": 1, "<SEP>": 2, "<ISNEXT>": 3, "<NOTNEXT>": 4, "<BLANK>": 5}
+  vocab_size = len(vocab_map) # initially, start with <MASK>, <CLS>, <SEP>, <ISNEXT>, <NOTNEXT>, <BLANK>
+  
   for file_name in allfiles:
     with open(file_name, 'r') as f:
       lines = f.readlines()
@@ -69,8 +71,18 @@ def getData(batch_size=1, mask=0.15):
   for i in range(0, len(all_obs), batch_size):
     obs_batch = []
     target_batch = []
+    seq_length = 0
     for j in range(i, i + batch_size):
+      if i + batch_size >= len(all_obs): continue
+      seq_length = max(seq_length, len(all_obs[j]))
+
+    for j in range(i, i + batch_size):
+      if i + batch_size >= len(all_obs): continue
+      while len(all_obs[j]) < seq_length:
+        all_obs[j].append(vocab_map["<BLANK>"])
       obs_batch.append(all_obs[j])
+      while len(all_target[j]) < seq_length:
+        all_target[j].append(vocab_map["<BLANK>"])
       target_batch.append(all_target[j])
     cur_dict = dict()
     cur_dict["obs"] = jnp.array(obs_batch)
