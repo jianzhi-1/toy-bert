@@ -1,4 +1,5 @@
 # Toy BERT
+<work in progress>
 This is a toy version of BERT, created for UC Berkeley CS182 (Fall 2022) Final Project.
 
 We want to achieve three goals:
