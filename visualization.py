@@ -20,4 +20,3 @@ for i in range(len(embedding_numpy)):
 plt.colorbar()
 plt.title("Scatter Plot of t-SNE (annotated)")
 plt.show()
-plt.show()
