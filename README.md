@@ -11,6 +11,8 @@ If you are working on Colab, create an empty folder data under the root director
 
 ### Data
 The data are lyrics from various songs. See under the 'data' folder.
+  
+TODO: add random shuffing to the data, then try for more epochs.
 
 
 References: https://theaisummer.com/jax-transformer/
