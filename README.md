@@ -7,6 +7,7 @@ We want to achieve three goals:
 - train a classification task using the <NSP> token
 
 ### Set-up
+If you are working on Colab, create an empty folder data under the root directory and upload all the files in the 'data' folder to it.
 
 ### Data
 The data are lyrics from various songs. See under the 'data' folder.
