@@ -14,5 +14,6 @@ The data are lyrics from various songs. See under the 'data' folder.
   
 TODO: add random shuffing to the data, then try for more epochs.
 TODO: may want to collapse the other classes into a helper file instead, otherwise currently it is clogging up the visualization.
+TODO: remove all the commas and lower case all the tokens when processing data
 
 References: https://theaisummer.com/jax-transformer/
