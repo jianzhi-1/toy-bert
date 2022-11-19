@@ -22,10 +22,10 @@ def getData(batch_size=1, mask=0.15):
   allfiles = [join(direc, f) for f in listdir(direc) if isfile(join(direc, f))]
   data_pairs = []
 
-  
   vocab_map = {"<MASK>": 0, "<CLS>": 1, "<SEP>": 2, "<ISNEXT>": 3, "<NOTNEXT>": 4, "<BLANK>": 5}
   vocab_size = len(vocab_map) # initially, start with <MASK>, <CLS>, <SEP>, <ISNEXT>, <NOTNEXT>, <BLANK>
-  
+  seq_length = 0
+
   for file_name in allfiles:
     with open(file_name, 'r') as f:
       lines = f.readlines()
@@ -64,20 +64,17 @@ def getData(batch_size=1, mask=0.15):
         
         obs = ["<CLS>"] + tokenized_sentence_1 + ["<SEP>"] + tokenized_sentence_2
         obs = [vocab_map[token] for token in obs]
+        seq_length = max(seq_length, len(obs))
         all_obs.append(obs)
         all_target.append(target)
   
   assert len(all_obs) == len(all_target)
   for i in range(0, len(all_obs), batch_size):
+    if i + batch_size >= len(all_obs): continue
     obs_batch = []
     target_batch = []
-    seq_length = 0
-    for j in range(i, i + batch_size):
-      if i + batch_size >= len(all_obs): continue
-      seq_length = max(seq_length, len(all_obs[j]))
 
     for j in range(i, i + batch_size):
-      if i + batch_size >= len(all_obs): continue
       while len(all_obs[j]) < seq_length:
         all_obs[j].append(vocab_map["<BLANK>"])
       obs_batch.append(all_obs[j])
