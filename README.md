@@ -2,7 +2,7 @@
 <work in progress>
 This is a toy version of BERT, created for UC Berkeley CS182 (Fall 2022) Final Project.
 
-![Toy BERT Logo](./logo.png)
+<img src="./logo.jpg" alt="Toy BERT Logo" width="200"/>
 
 We want to achieve three goals:
 - construction of the BERT model and training process
